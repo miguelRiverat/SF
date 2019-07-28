@@ -1,0 +1,9 @@
+<nb-card-header>
+  <span>Comparacion por periodo</span>
+  <nb-select [selected]="period" (selectedChange)="changePeriod($event)">
+    <nb-option *ngFor="let period of periods" [value]="period">{{ period }}</nb-option>
+  </nb-select>
+  <nb-select [selected]="type" (selectedChange)="changeType($event)">
+    <nb-option *ngFor="let type of types" [value]="type">{{ type }}</nb-option>
+  </nb-select>
+</nb-card-header>

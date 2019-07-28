@@ -1,0 +1,26 @@
+<div class="container">
+
+
+  <table class="table">
+    <thead class="thead-light" >
+      <tr>
+        <th class="table-light" scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col">name</th>
+        <th scope="col">startTime</th>
+        <th scope="col">statusTime</th>
+        <th scope="col">state</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light" *ngFor="let object of flows; let i = index">
+        <th scope="row">{{i}}</th>
+        <td>{{object.id}}</td>
+        <td>{{object.name}}</td>
+        <td>{{object.startTime}}</td>
+        <td>{{object.currentStateTime}}</td>
+        <td>{{object.currentState}}</td>
+      </tr>
+    </tbody>
+  </table>  
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="card w-50">
+    <div class="card-header">
+        <h5>Cargar archivo</h5>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="custom-file form-group">
+          <label class="custom-file-label" for="file">{{ fileToUpload && fileToUpload.name  || 'Selecciona archivo'}}</label>
+          <input class="custom-file-input custom-file-control form-control-file" id="photo" type="file" value="Buscar" />
+        </div>
+        <button type="button" class="btn btn-success btn-s margin float-right" (click)="upload()">
+          Subir...
+        </button>
+      </form>    
+    </div>
+  </div>
+
+  <br>
+
+  <table class="table">
+    <thead class="thead-light" >
+      <tr>
+        <th class="table-light" scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Bucket</th>
+        <th scope="col">Size</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th scope="col">Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light" *ngFor="let object of files; let i = index">
+        <th scope="row">{{i}}</th>
+        <td>{{object.name}}</td>
+        <td>{{object.bucket}}</td>
+        <td>{{ object.size ? ( object.size / 1000000 ) + ' Mb' : 0 }}</td>
+        <td>{{object.timeCreated}}</td>
+        <td>{{object.updated}}</td>
+        <td>{{object.contentType}}</td>
+      </tr>
+    </tbody>
+  </table>  
+</div>
