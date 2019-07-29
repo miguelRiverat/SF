@@ -1,0 +1,29 @@
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+  <table class="table">
+    <thead class="table-light" >
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Presentacion</th>
+        <th scope="col">Genero</th>
+        <th scope="col">Molecula</th>
+        <th scope="col">Prediccion</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light" *ngFor="let object of predictionModel; let i = index">
+        <td>{{object.producto}}</td>
+        <td>{{object.presentacion}}</td>
+        <td>{{object.genero}}</td>
+        <td>{{object.molecula}}</td>
+        <td>{{object.prediction}}</td>
+        <td>
+          <button (click)="generatePredict(object.producto, object.presentacion, 'mthunidades', i)" class="btn btn-primary">
+            prediccion
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>  
+</div>  

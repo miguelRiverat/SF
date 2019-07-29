@@ -31,6 +31,8 @@ import { TrafficFrontCardComponent } from './traffic-reveal-card/front-side/traf
 import { TrafficCardsHeaderComponent } from './traffic-reveal-card/traffic-cards-header/traffic-cards-header.component';
 import { TrafficBackCardComponent } from './traffic-reveal-card/back-side/traffic-back-card.component';
 import { TrafficBarChartComponent } from './traffic-reveal-card/back-side/traffic-bar-chart.component';
+import { PredictionComponent } from './prediction/prediction.component';
+
 import {
   ECommerceVisitorsAnalyticsComponent,
 } from './visitors-analytics/visitors-analytics.component';
@@ -86,6 +88,7 @@ import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earni
     StatsCardBackComponent,
     TrafficRevealCardComponent,
     TrafficBarChartComponent,
+    PredictionComponent,
     TrafficFrontCardComponent,
     TrafficBackCardComponent,
     TrafficBarComponent,

@@ -1,14 +1,74 @@
 <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
   <nb-card-front>
     <nb-card size="tiny">
-      <ngx-earning-card-front></ngx-earning-card-front>
-      <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon>
+      <!--<ngx-earning-card-back></ngx-earning-card-back>-->
+
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table">
+          <thead class="table-light" >
+            <tr>
+              <th scope="col">Agrupacion</th>
+              <th scope="col">Fechas</th>
+              <th scope="col">Moleculas</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-light">
+              <td>Agrupar molecula y venta</td>
+              <td>
+                <nb-select [selected]="datesIn" (selectedChange)="changeDate($event)">
+                  <nb-option *ngFor="let date of dates" [value]="date">{{ date }}</nb-option>
+                </nb-select>
+              </td>
+              <td>
+                <nb-select [selected]="moleculasIn" (selectedChange)="changeMolecula($event)">
+                  <nb-option *ngFor="let molecula of moleculas" [value]="molecula">{{ molecula }}</nb-option>
+                </nb-select>
+              </td>
+              <td>
+                <button (click)="generate('agrupacion_venta_molecula', datesIn, moleculasIn)" class="btn btn-primary">
+                  Generar
+                </button>
+              </td>
+            </tr>
+
+            <tr class="table-light">
+              <td>Agrupar molecula y venta</td>
+              <td>
+                <nb-select [selected]="prodventaDatesIn" (selectedChange)="changeDateProdVenta($event)">
+                  <nb-option *ngFor="let date of dates" [value]="date">{{ date }}</nb-option>
+                </nb-select>
+              </td>
+              <td>
+              </td>
+              <td>
+                <button (click)="generate('agrupacion_prod_venta', prodventaDatesIn)" class="btn btn-primary">
+                  Generar
+                </button>
+              </td>
+            </tr>
+
+            <tr class="table-light">
+                <td>Agrupar enfermedad producto/td>
+                <td>
+                  <nb-select [selected]="enfermIn" (selectedChange)="changeEnferm($event)">
+                    <nb-option *ngFor="let date of dates" [value]="date">{{ date }}</nb-option>
+                  </nb-select>
+                </td>
+                <td>
+                </td>
+                <td>
+                  <button (click)="generate('agrupacion_prod_enfermedad', enfermIn)" class="btn btn-primary">
+                    Generar
+                  </button>
+                </td>
+              </tr>
+
+          </tbody>
+        </table>
+      </div>  
+  
     </nb-card>
   </nb-card-front>
-  <nb-card-back>
-    <nb-card size="tiny">
-      <ngx-earning-card-back></ngx-earning-card-back>
-      <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon>
-    </nb-card>
-  </nb-card-back>
 </nb-flip-card>

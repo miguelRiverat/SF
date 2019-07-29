@@ -10,18 +10,17 @@ import { takeWhile } from 'rxjs/operators';
 export class EarningCardBackComponent implements OnDestroy {
   private alive = true;
 
-  earningPieChartData: PieChart[];
+  earningPieChartData = [{value: 20, name: 'grupo1'},{value: 20, name: 'grupo2'},{value: 60, name: 'grupo2'}];
   name: string;
   color: string;
   value: number;
-  defaultSelectedCurrency: string = 'Bitcoin';
+  defaultSelectedCurrency: string = 'grupo1';
 
   constructor(private earningService: EarningData ) {
     this.earningService.getEarningPieChartData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((earningPieChartData) => {
         console.log(earningPieChartData)
-        this.earningPieChartData = earningPieChartData;
       });
   }
 
