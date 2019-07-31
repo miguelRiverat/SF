@@ -32,11 +32,9 @@ import { VisualComponent } from './visual/visual.component';
     ThemeModule,
     NbMenuModule,
     NbSelectModule,
-    //DashboardModule,
     ECommerceModule,
     NgxEchartsModule,
     NbSpinnerModule,
-//    MiscellaneousModule,
   ],
   declarations: [
     PagesComponent,

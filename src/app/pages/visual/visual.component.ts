@@ -48,7 +48,7 @@ export class VisualComponent {
       console.log(data)
       this.chartOption = {
         title: {
-            text: '',
+            text: 'Ventas por unidad agrupadas por Enfermedad',
             left: 10
         },
         tooltip: {
