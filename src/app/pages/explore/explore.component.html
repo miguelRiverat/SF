@@ -1,0 +1,72 @@
+
+
+<div class="row">
+  <div class="col-md-8 col-md-8 col-xxl-8">
+    <div> 
+      <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+        <table class="table">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Presentacion</th>
+              <th scope="col">Genero</th>
+              <th scope="col">Molecula</th>
+            </tr>
+          </thead>
+          <tbody class="table-hover">
+            <tr class="table-light custom-tr" *ngFor="let object of predictionModel; let i = index" (click)="getDetail(object.presentacion)">
+              <td>{{object.producto}}</td>
+              <td>{{object.presentacion}}</td>
+              <td>{{object.genero}}</td>
+              <td>{{object.molecula}}</td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4	col-md-4 col-lg-4">
+    <div>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+        <table class="table">
+          <thead class="table-light" >
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Año</th>
+              <th scope="col">Mes</th>
+              <th scope="col">Pesos</th>
+              <th scope="col">Unidades</th>
+              
+              <!--<th scope="col">Presentacion</th>
+                <th scope="col">Corporacion</th>
+              -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-light" *ngFor="let detail of modelDetail; let i = index">
+              <!--
+                <td>{{detail.corporacion}}</td>
+                <td>{{detail.presentacion}}</td>
+              -->
+              <td>{{detail.producto}}</td>
+              <td>{{detail.year}}</td>
+              <td>{{detail.month}}</td>
+              <td>{{detail.mthprecio}}</td>
+              <td>{{detail.mthunidades}}</td>
+            </tr>
+          </tbody>
+        </table>  
+      </div>  
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-md-12 col-md-12 col-xxl-12">
+    <div class="back-white col-md-12 col-sm-12 col-md-21 col-lg-12">
+      <div *ngIf="showLine" echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart"></div>        
+    </div>
+  </div>
+</div>

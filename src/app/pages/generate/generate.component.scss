@@ -1,0 +1,20 @@
+@import '../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  .my-custom-scrollbar {
+    height: 400px;
+    overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+    display: block;
+  }
+  .back-white {
+    background-color: white;
+  }
+  .heightCard {
+    height: 200px;
+  }
+  .top-buffer {
+    margin-top:20px; 
+  }
+}

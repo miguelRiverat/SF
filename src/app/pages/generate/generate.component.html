@@ -1,0 +1,214 @@
+<div class="row">
+  <div class="col-md-12 col-md-2 col-xxl-12"> 
+    <div class="row">
+
+
+      <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+        <div class="card w-100" [nbSpinner]="loading_1" nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">
+          <div class="card-header">
+            <h6>Unidades vendidas clasificadas por sustancia activa</h6>
+          </div>
+          <div class="card-body">
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label>Fecha</label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+                <nb-select [selected]="datesIn" (selectedChange)="changeDate($event)">
+                  <nb-option *ngFor="let date of dates" [value]="date">{{ date }}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label>Substancia</label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+                <nb-select [selected]="moleculasIn" (selectedChange)="changeMolecula($event)">
+                  <nb-option *ngFor="let molecula of moleculas" [value]="molecula">{{ molecula }}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label></label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4" style="width: 200px;">
+                <button (click)="generate('agrupacion_venta_molecula', datesIn, moleculasIn)" class="btn btn-primary">
+                  Generar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
+
+      <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+        <div class="card w-100" [nbSpinner]="loading_2" nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">
+          <div class="card-header">
+            <h6>Unidades vendidas clasificadas por corporación</h6>
+          </div>
+          <div class="card-body">
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label style="margin-top: 30px;"></label>
+              </div>
+            </div>
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label>Fecha</label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+                <nb-select [selected]="prodventaDatesIn" (selectedChange)="changeDateProdVenta($event)">
+                  <nb-option *ngFor="let date of dates" [value]="date">{{ date }}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label></label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+                  <button (click)="generate('agrupacion_prod_venta', prodventaDatesIn)" class="btn btn-primary">
+                    Generar
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
+
+      <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+        <div class="card w-100" [nbSpinner]="loading_3" nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">
+          <div class="card-header">
+            <h6>Unidades vendidas clasificadas por patologías</h6>
+          </div>
+          <div class="card-body">
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                  <label style="margin-top: 30px;"></label>
+              </div>
+            </div>
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label>Fecha</label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+                <nb-select [selected]="enfermIn" (selectedChange)="changeEnferm($event)">
+                  <nb-option *ngFor="let date of dates" [value]="date">{{ date }}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="row top-buffer">
+              <div class="col-md-4 col-sm-4 col-md-4 col-lg-4">
+                <label></label>
+              </div>
+              <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+                <button (click)="generate('agrupacion_prod_enfermedad', enfermIn)" class="btn btn-primary">
+                  Generar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
+      
+    
+    
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-md-12 col-md-2 col-xxl-12"> 
+
+    <div *ngIf="alertType === 'success'" class="alert alert-success" role="alert">
+      La tabla se creo en bigquery correctamente.
+    </div>
+
+    <div *ngIf="alertType === 'danger'" class="alert alert-danger" role="alert">
+      Ocurrio un error al crear la tabla.
+    </div>
+
+    <div *ngIf="alertType === 'warn_need_data'" class="alert alert-info" role="alert">
+      No existen suficientes ventas para agrupar los resultados.
+    </div>
+
+    <div *ngIf="alertType === 'info'" class="alert alert-info" role="alert">
+      La tabla ya existe.
+    </div>
+
+
+    <!--<div class="row">
+      <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+          
+        <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+          <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">CENTROID_ID</th>
+                <th scope="col">corporacion</th>
+                <th scope="col">venta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let prod of modelProd; let i = index">
+                <td>{{prod.centroide}}</td>
+                <td>{{prod.corporacion}}</td>
+                <td>{{prod.venta}}</td>
+              </tr>
+            </tbody>
+          </table>  
+        </div>  
+
+      </div>
+      <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+
+        <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+          <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Grupo</th>
+                <th scope="col">Corporacion</th>
+                <th scope="col">Venta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let corp of modelCorp; let i = index">
+                <td>{{corp.CENTROID_ID}}</td>
+                <td>{{corp.corporacion}}</td>
+                <td>{{corp.venta}}</td>
+              </tr>
+            </tbody>
+          </table>  
+        </div>  
+
+      </div>
+      <div class="col-md-6 col-sm-12 col-md-4 col-lg-4">
+
+        <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+          <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Grupo</th>
+                <th scope="col">Enfermedad</th>
+                <th scope="col">Venta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let disease of modelDisease; let i = index">
+                <td>{{disease.Grupo}}</td>
+                <td>{{disease.enfermedad}}</td>
+                <td>{{disease.venta}}</td>
+              </tr>
+            </tbody>
+          </table>  
+        </div>  
+
+
+      </div>
+    </div>-->
+  </div>
+</div>

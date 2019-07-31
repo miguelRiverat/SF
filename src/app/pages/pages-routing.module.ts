@@ -3,18 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 //import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
+import { ECommerceComponent } from './graphs/e-commerce.component';
 //import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { UploadComponent } from './upload/upload.component'
 import { JobsComponent } from './jobs/jobs.component'
+import { ExploreComponent } from './explore/explore.component'
+import { GenerateComponent} from './generate/generate.component'
+import { VisualComponent } from './visual/visual.component'
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
+      path: 'explore',
+      component: ExploreComponent,
+    },
+    {
       path: 'dashboard',
-      component: ECommerceComponent,
+      component: VisualComponent,
     },
     {
       path: 'uploads',
@@ -23,8 +30,11 @@ const routes: Routes = [{
     {
       path: 'flows',
       component: JobsComponent,
+    },
+    {
+      path: 'generate',
+      component: GenerateComponent,
     }
-    
     /*{
       path: 'iot-dashboard',
       component: DashboardComponent,
