@@ -1,54 +1,60 @@
-
-
 <div class="row">
-  <div class="col-md-8 col-md-8 col-xxl-8">
-    <div> 
-      <div class="table-wrapper-scroll-y my-custom-scrollbar" >
-        <table class="table">
+  <div class="col-md-7 col-md-7 col-xxl-7">
+    <nb-card status="primary">
+      <nb-card-header>
+        <div class="row">
+          <div class="col-md-6 col-md-6 col-xxl-6">
+            Lista de productos por presentacion
+          </div>
+          
+          <div class="col-md-2 col-md-2 col-xxl-2">
+            Corporacion
+          </div>
+
+          <div class="col-md-4 col-md-4 col-xxl-4">
+            <nb-select [selected]="corpsIn" (selectedChange)="changeLab($event)" style="width: 100%">
+              <nb-option *ngFor="let corp of corps" [value]="corp">{{ corp }}</nb-option>
+            </nb-select>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <table class="table table-wrapper-scroll-y my-custom-scrollbar" >
           <thead class="table-light">
             <tr>
+              <th scope="col">Corporacion</th>
               <th scope="col">Producto</th>
               <th scope="col">Presentacion</th>
-              <th scope="col">Genero</th>
-              <th scope="col">Molecula</th>
             </tr>
           </thead>
           <tbody class="table-hover">
             <tr class="table-light custom-tr" *ngFor="let object of predictionModel; let i = index" (click)="getDetail(object.presentacion)">
+              <td>{{object.corp}}</td>
               <td>{{object.producto}}</td>
               <td>{{object.presentacion}}</td>
-              <td>{{object.genero}}</td>
-              <td>{{object.molecula}}</td>
             </tr>
           </tbody>
         </table>  
-      </div>
-    </div>
+      </nb-card-body>
+    </nb-card>
   </div>
-  <div class="col-md-4 col-sm-4	col-md-4 col-lg-4">
-    <div>
-      <div class="table-wrapper-scroll-y my-custom-scrollbar" >
-        <table class="table">
-          <thead class="table-light" >
+  <div class="col-md-5 col-md-5 col-xxl-5">
+    <nb-card status="primary">
+      <nb-card-header style="height: 72px">Detalle de presentacion</nb-card-header>
+      <nb-card-body>
+          <table class="table table-wrapper-scroll-y my-custom-scrollbar" >
+            <thead class="table-light" >
             <tr>
-              <th scope="col">Producto</th>
+              <th scope="col">Presentacion</th>
               <th scope="col">Año</th>
               <th scope="col">Mes</th>
               <th scope="col">Pesos</th>
               <th scope="col">Unidades</th>
-              
-              <!--<th scope="col">Presentacion</th>
-                <th scope="col">Corporacion</th>
-              -->
             </tr>
           </thead>
           <tbody>
             <tr class="table-light" *ngFor="let detail of modelDetail; let i = index">
-              <!--
-                <td>{{detail.corporacion}}</td>
-                <td>{{detail.presentacion}}</td>
-              -->
-              <td>{{detail.producto}}</td>
+              <td>{{detail.presentacion}}</td>
               <td>{{detail.year}}</td>
               <td>{{detail.month}}</td>
               <td>{{detail.mthprecio}}</td>
@@ -56,17 +62,17 @@
             </tr>
           </tbody>
         </table>  
-      </div>  
-    </div>
+      </nb-card-body>
+    </nb-card>
   </div>
 </div>
-
-<br>
-
 <div class="row">
-  <div class="col-md-12 col-md-12 col-xxl-12">
-    <div class="back-white col-md-12 col-sm-12 col-md-21 col-lg-12">
-      <div *ngIf="showLine" echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart"></div>        
-    </div>
+  <div class="col-md-12 col-sm-12 col-md-21 col-lg-12">
+    <nb-card>
+      <nb-card-header>Historico de producto</nb-card-header>
+      <nb-card-body>
+        <div *ngIf="showLine" echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart"></div>
+      </nb-card-body>
+    </nb-card>
   </div>
 </div>

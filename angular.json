@@ -168,7 +168,7 @@
       }
     }
   },
-  "defaultProject": "ngx-admin-demo",
+  "defaultProject": "portal-demo",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "ngx",

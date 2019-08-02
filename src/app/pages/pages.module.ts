@@ -35,6 +35,13 @@ import { VisualComponent } from './visual/visual.component';
     ECommerceModule,
     NgxEchartsModule,
     NbSpinnerModule,
+    NbButtonModule,
+    NbCardModule,
+    NbProgressBarModule,
+    NbTabsetModule,
+    NbUserModule,
+    NbIconModule,
+    NbListModule
   ],
   declarations: [
     PagesComponent,
@@ -42,7 +49,7 @@ import { VisualComponent } from './visual/visual.component';
     JobsComponent,
     ExploreComponent,
     GenerateComponent,
-    VisualComponent,
+    VisualComponent
   ],
 })
 export class PagesModule {

@@ -17,5 +17,12 @@
   .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: blue($color: #aa5353);
   }
+
+  .bd-example {
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: .2rem;
+  }
   
 }

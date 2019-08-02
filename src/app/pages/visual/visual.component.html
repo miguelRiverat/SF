@@ -1,5 +1,123 @@
 <div class="row">
-  <div class="col-xxl-12 col-sm-12 col-md-12 col-lg-12" style="background-color: white">
-    <div echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart"></div>  
+  <div class="col-xxl-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+      <table class="table">
+        <thead class="table-light" >
+          <tr>
+            <th scope="col">Corporacion</th>
+            <th scope="col">Presentacion</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
+            <td>{{predict.corporacion}}</td>
+            <td>{{predict.presentacion}}</td>
+            <td>{{predict.precio}}</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>  
+  </div>
+  <div class="col-xxl-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+      <table class="table">
+        <thead class="table-light" >
+          <tr>
+            <th scope="col">Corporacion</th>
+            <th scope="col">Presentacion</th>
+            <th scope="col">Pesos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
+            <td>{{predict.corporacion}}</td>
+            <td>{{predict.presentacion}}</td>
+            <td>{{predict.pesos}}</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>  
+  </div>
+  <div class="col-xxl-4 col-sm-4 col-md-4 col-lg-4">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+      <table class="table">
+        <thead class="table-light" >
+          <tr>
+            <th scope="col">Corporacion</th>
+            <th scope="col">Presentacion</th>
+            <th scope="col">Unidades</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
+            <td>{{predict.corporacion}}</td>
+            <td>{{predict.presentacion}}</td>
+            <td>{{predict.unidades}}</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>  
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xxl-12 col-sm-12 col-md-12 col-lg-12 back-white" style="height: 582px">
+    <div echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart" style="margin-top: 2%"></div>  
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-xxl-12 col-sm-12 col-md-12 col-lg-12">
+    <nb-card class="cards-container">
+      <nb-card size="large" class="table-card">
+        <nb-card-header>
+          Indicadores de comportamiento mensual
+        </nb-card-header>
+    
+        <nb-tabset fullWidth>
+          <nb-tab *ngFor="let year of listData" [tabTitle]="year.title" [active]="year.active">
+            <nb-list>
+              <nb-list-item *ngFor="let month of year.months">
+                <span class="month">{{ month.month }}</span>
+                <span>
+                  <nb-icon
+                    [class.down]="month.down"
+                    [class.up]="!month.down"
+                    [icon]="month.down ? 'arrow-down' : 'arrow-up'" pack="eva">
+                  </nb-icon>
+                  {{ month.delta }}
+                </span>
+                <span class="results">
+                  {{ month.unidades }} <span class="caption">Unidades</span>    {{ month.pesos }} <span class="caption">Pesos</span>
+                </span>
+              </nb-list-item>
+            </nb-list>
+          </nb-tab>
+        </nb-tabset>
+      </nb-card>
+    
+      <nb-card size="large" class="chart-card">
+        <nb-card-header>
+          <span class="stats">
+            <span class="caption">Consumed</span>
+            <span>816 <span class="caption">kWh</span></span>
+          </span>
+          <span class="stats">
+            <span class="caption">Spent</span>
+            <span>291 <span class="caption">USD</span></span>
+          </span>
+    
+          <nb-select [(selected)]="type" class="type-select">
+            <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
+          </nb-select>
+        </nb-card-header>
+        <div echarts [options]="optionsKpi" [loadingOpts]="loadingOpts" class="demo-chart"></div>  
+      </nb-card>
+    </nb-card>
   </div>
 </div>

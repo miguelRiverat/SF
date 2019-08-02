@@ -12,18 +12,24 @@ export class ExploreComponent {
 
   @Output() periodChange = new EventEmitter<string>();
   @Output() typeChange = new EventEmitter<string>();
+  @Output() corpsOut = new EventEmitter<string>();
 
   @Input() periodIn: string = 'year';
   @Input() typeIn: string = 'cantidad';
+  @Input() corpsIn = 'SANFER CORP.';
+
+  public corps = [];
 
   public productsUrl = 'https://us-central1-prime-principle-243417.cloudfunctions.net/products'
   public deatil = form => `https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=explore&form=${form}`
+  public corpUrl = `https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=corp`
 
   public predictionModel : {
+    corp: string,
     producto: string,
     presentacion: string,
-    genero:  string,
-    molecula: string,
+    //genero:  string,
+    //molecula: string,
     prediction: string
   }[]
 
@@ -37,16 +43,7 @@ export class ExploreComponent {
     },
     title: {
         left: 'center',
-        text: 'Historico',
-    },
-    toolbox: {
-        feature: {
-            dataZoom: {
-                yAxisIndex: 'none'
-            },
-            restore: {},
-            saveAsImage: {}
-        }
+        text: '',
     },
     xAxis: {
         type: 'category',
@@ -60,7 +57,7 @@ export class ExploreComponent {
     dataZoom: [{
         type: 'inside',
         start: 0,
-        end: 10
+        end: 100
     }, {
         start: 0,
         end: 10,
@@ -97,49 +94,6 @@ export class ExploreComponent {
         }
     ]
 };
-
-
-  /*public chartOption: EChartOption = {
-    title: {
-        text: '',
-        left: 10
-    },
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-    },
-    grid: {
-        bottom: 90
-    },
-    dataZoom: [{
-        type: 'inside'
-    }, {
-        type: 'slider'
-    }],
-    xAxis: {
-        data: [],
-        silent: false,
-        splitLine: {
-            show: false
-        },
-        splitArea: {
-            show: false
-        }
-    },
-    yAxis: {
-        splitArea: {
-            show: false
-        }
-    },
-    series: [{
-        type: 'bar',
-        data: [],
-        large: true
-    }]
-}*/
-
   public loadingOpts = {
     text: 'loading',
     color: '#ffffff',
@@ -160,7 +114,8 @@ export class ExploreComponent {
 
 
   constructor(private http: HttpClient) {
-    this.listProducts()
+    this.listProducts(this.corpsIn)
+    this.getCorps()
   }
 
   getDetail (form) {
@@ -177,18 +132,34 @@ export class ExploreComponent {
     })
   }
 
-  listProducts () {
+  getCorps () {
+    this.showLine = false
     return this.http
-      .get(this.productsUrl)
+    .get(this.corpUrl)
+    .subscribe(data => {
+        this.corps = data['rows'].map(element => element.corporacion)
+    })
+  }
+
+  changeLab(lab){
+    this.listProducts(lab)
+  }
+
+  listProducts (lab) {
+    return this.http
+      .get(`${this.productsUrl}?corp=${lab}`)
       .subscribe(data => {
         this.predictionModel = data['results'].reduce((acum, elem) => {
-          return acum.concat(elem.forms.map(form => ({
-            producto: elem.producto,
-            presentacion: form.name,
-            genero:  form.genero,
-            molecula: form.molecula,
-            prediction: ''
-          })))
+          return acum.concat(elem.forms.map(form => {
+            return {
+              corp: elem.corp,
+              producto: elem.producto,
+              presentacion: form.name,
+              //genero:  form.genero,
+              //molecula: form.molecula,
+              prediction: ''
+            }
+          }))
         },[])
       })
   }
