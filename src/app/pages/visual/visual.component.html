@@ -1,62 +1,127 @@
+
+
 <div class="row">
   <div class="col-xxl-4 col-sm-4 col-md-4 col-lg-4">
     <div class="table-wrapper-scroll-y my-custom-scrollbar" >
-      <table class="table">
-        <thead class="table-light" >
-          <tr>
-            <th scope="col">Corporacion</th>
-            <th scope="col">Presentacion</th>
-            <th scope="col">Precio</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
-            <td>{{predict.corporacion}}</td>
-            <td>{{predict.presentacion}}</td>
-            <td>{{predict.precio}}</td>
-          </tr>
-        </tbody>
-      </table>  
+      <nb-card status="primary">
+        <nb-card-header>
+          <div class="row">
+            <div class="col-md-5 col-md-5 col-xxl-5">
+              Prediccion Mayo 2019
+            </div>
+            
+            <div class="col-md-3 col-md-3 col-xxl-3">
+              Corporacion
+            </div>
+  
+            <div class="col-md-4 col-md-4 col-xxl-4">
+              <nb-select [selected]="corpsPesosIn" (selectedChange)="changeLabPesos($event)" style="width: 100%">
+                <nb-option *ngFor="let corp of corpsPesos" [value]="corp">{{ corp }}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <table class="table table-wrapper-scroll-y my-custom-scrollbar" >
+            <thead class="table-light" >
+              <tr>
+                <th scope="col">Corporacion</th>
+                <th scope="col">Presentacion</th>
+                <th scope="col">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
+                <td>{{predict.corporacion}}</td>
+                <td>{{predict.presentacion}}</td>
+                <td>{{predict.precio}}</td>
+              </tr>
+            </tbody>
+          </table>  
+        </nb-card-body>
+      </nb-card>
     </div>  
   </div>
   <div class="col-xxl-4 col-sm-4 col-md-4 col-lg-4">
     <div class="table-wrapper-scroll-y my-custom-scrollbar" >
-      <table class="table">
-        <thead class="table-light" >
-          <tr>
-            <th scope="col">Corporacion</th>
-            <th scope="col">Presentacion</th>
-            <th scope="col">Pesos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
-            <td>{{predict.corporacion}}</td>
-            <td>{{predict.presentacion}}</td>
-            <td>{{predict.pesos}}</td>
-          </tr>
-        </tbody>
-      </table>  
+      <nb-card status="primary">
+        <nb-card-header>
+          <div class="row">
+            <div class="col-md-5 col-md-5 col-xxl-5">
+              Prediccion Mayo 2019
+            </div>
+            
+            <div class="col-md-3 col-md-3 col-xxl-3">
+              Corporacion
+            </div>
+  
+            <div class="col-md-4 col-md-4 col-xxl-4">
+              <nb-select [selected]="corpsUnidadIn" (selectedChange)="changeLabUnidad($event)" style="width: 100%">
+                <nb-option *ngFor="let corp of corpsUnidad" [value]="corp">{{ corp }}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <table class="table table-wrapper-scroll-y my-custom-scrollbar" >
+            <thead class="table-light" >
+              <tr>
+                <th scope="col">Corporacion</th>
+                <th scope="col">Presentacion</th>
+                <th scope="col">Pesos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
+                <td>{{predict.corporacion}}</td>
+                <td>{{predict.presentacion}}</td>
+                <td>{{predict.pesos}}</td>
+              </tr>
+            </tbody>
+          </table>  
+        </nb-card-body>
+      </nb-card>
     </div>  
   </div>
   <div class="col-xxl-4 col-sm-4 col-md-4 col-lg-4">
     <div class="table-wrapper-scroll-y my-custom-scrollbar" >
-      <table class="table">
-        <thead class="table-light" >
-          <tr>
-            <th scope="col">Corporacion</th>
-            <th scope="col">Presentacion</th>
-            <th scope="col">Unidades</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
-            <td>{{predict.corporacion}}</td>
-            <td>{{predict.presentacion}}</td>
-            <td>{{predict.unidades}}</td>
-          </tr>
-        </tbody>
-      </table>  
+      <nb-card status="primary">
+        <nb-card-header>
+          <div class="row">
+            <div class="col-md-5 col-md-5 col-xxl-5">
+              Prediccion Mayo 2019
+            </div>
+            
+            <div class="col-md-3 col-md-3 col-xxl-3">
+              Corporacion
+            </div>
+  
+            <div class="col-md-4 col-md-4 col-xxl-4">
+              <nb-select [selected]="corpsPrecioIn" (selectedChange)="changeLabPrecio($event)" style="width: 100%">
+                <nb-option *ngFor="let corp of corpsPrecio" [value]="corp">{{ corp }}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+        <table class="table">
+            <thead class="table-light" >
+              <tr>
+                <th scope="col">Corporacion</th>
+                <th scope="col">Presentacion</th>
+                <th scope="col">Unidades</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let predict of modelPredict; let i = index">
+                <td>{{predict.corporacion}}</td>
+                <td>{{predict.presentacion}}</td>
+                <td>{{predict.unidades}}</td>
+              </tr>
+            </tbody>
+          </table>  
+        </nb-card-body>
+      </nb-card>
     </div>  
   </div>
 </div>
@@ -64,8 +129,12 @@
 <br>
 
 <div class="row">
-  <div class="col-xxl-12 col-sm-12 col-md-12 col-lg-12 back-white" style="height: 582px">
-    <div echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart" style="margin-top: 2%"></div>  
+  <div class="col-xxl-12 col-sm-12 col-md-12 col-lg-12">
+    <nb-card>
+      <nb-card-body>
+          <div echarts [options]="chartOption" [loadingOpts]="loadingOpts" class="demo-chart" style="margin-top: 2%"></div>  
+      </nb-card-body>
+    </nb-card>
   </div>
 </div>
 
@@ -74,7 +143,7 @@
 <div class="row">
   <div class="col-xxl-12 col-sm-12 col-md-12 col-lg-12">
     <nb-card class="cards-container">
-      <nb-card size="large" class="table-card">
+      <nb-card size="large" class="table-card" style="margin-top: 10%">
         <nb-card-header>
           Indicadores de comportamiento mensual
         </nb-card-header>
@@ -101,20 +170,8 @@
         </nb-tabset>
       </nb-card>
     
-      <nb-card size="large" class="chart-card">
+      <nb-card size="large" class="chart-card" style="margin-top: 10%">
         <nb-card-header>
-          <span class="stats">
-            <span class="caption">Consumed</span>
-            <span>816 <span class="caption">kWh</span></span>
-          </span>
-          <span class="stats">
-            <span class="caption">Spent</span>
-            <span>291 <span class="caption">USD</span></span>
-          </span>
-    
-          <nb-select [(selected)]="type" class="type-select">
-            <nb-option *ngFor="let t of types" [value]="t">{{ t }}</nb-option>
-          </nb-select>
         </nb-card-header>
         <div echarts [options]="optionsKpi" [loadingOpts]="loadingOpts" class="demo-chart"></div>  
       </nb-card>
