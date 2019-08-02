@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class GenerateComponent {
 
   public url = 'https://us-central1-prime-principle-243417.cloudfunctions.net/products';
-  dates: string[] = ['2019-04', '2019-03', '2019-02', '2019-01'];
+  dates: string[] = ['2019-04', '2019-03', '2019-02', '2019-01', '2018-12', '2018-11', '2018-10', '2018-09', '2018-08', '2018-07'];
   moleculas: string[] = ['ZORRITONE JBE 120 ML'];
   public loading_1 = false;
   public loading_2 = false;
@@ -58,7 +58,11 @@ export class GenerateComponent {
   getMoleculas() {
     this.http.get(this.url)
       .subscribe(data => {
-        this.moleculas = data['results'].map(producto => producto.forms[0].molecula)
+        data['results'].map(producto => {
+          producto.forms.forEach(pro => {
+            this.moleculas.push(pro.name)
+          })
+        })
     })
   }
 
@@ -84,7 +88,7 @@ export class GenerateComponent {
     let getTable = `https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=table&table=`
     let tableType = ''
     if (type == 'agrupacion_venta_molecula') {
-      url = 'https://us-central1-prime-principle-243417.cloudfunctions.net/predictions-kmeans'
+      url = 'https://us-central1-prime-principle-243417.cloudfunctions.net/predictions-kmeans?all=true'
       body = {
         "date" : dateN,
         "molecula": molecula

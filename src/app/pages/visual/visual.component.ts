@@ -23,7 +23,31 @@ export class VisualComponent {
   public optionsKpi: EChartOption;
   public showOptions = false
 
-  public modelPredict: {  
+  public modelPredictPes: {
+    corporacion : String,
+    laboratorio	: String,
+    moleculan1	: String,
+    presentacion	: String,
+    producto	: String,
+    mthunidades	: String,
+    mthpesos	: String,
+    mthprecio	: String,
+    fechaventa: String
+  }[]
+
+  public modelPredictPre: {  
+    corporacion : String,
+    laboratorio	: String,
+    moleculan1	: String,
+    presentacion	: String,
+    producto	: String,
+    mthunidades	: String,
+    mthpesos	: String,
+    mthprecio	: String,
+    fechaventa: String
+  }[]
+
+    public modelPredictUni: {  
     corporacion : String,
     laboratorio	: String,
     moleculan1	: String,
@@ -56,6 +80,13 @@ export class VisualComponent {
     this.getCorps()
     this.getData()
     this.getMonths()
+    this.getModelPredict('SANFER CORP.', 'Uni')
+    this.getModelPredict('SANFER CORP.', 'Pes')
+    this.getModelPredict('SANFER CORP.', 'Pre')
+  }
+
+  changeLab(lab, corps){
+    this.getModelPredict(lab, corps)
   }
 
   getCorps () {
@@ -103,7 +134,6 @@ export class VisualComponent {
             }
             return acum
           },[])
-          console.log(this.listData)
           this.getKpiData()
     },
     error => {
@@ -132,12 +162,12 @@ export class VisualComponent {
   }
 
 
-  getModelPredict() {
+  getModelPredict(lab, corps) {
     this.http
-      .get('https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=tableLimit&table=sanfer_medicine_prediction&offset=0')
+      .get(`https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=tableLimit&table=sanfer_medicine_prediction&offset=0&lab=${lab}`)
       .subscribe(
           data => {
-            this.modelPredict = data['rows']
+            this[`modelPredict${corps}`] = data['rows']
       },
       error => {
           console.log('sec error', error) 
@@ -153,7 +183,6 @@ export class VisualComponent {
       .subscribe(
           data => {
             this.getChartOptions(data)
-            this.getModelPredict()
       },
       error => {
           console.log('sec error', error) 
