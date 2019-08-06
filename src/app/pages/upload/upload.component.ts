@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 
-const URL = 'http://localhost:3000/uploadfile';
+const URL = 'http://35.238.233.15:3000/uploadfile';
 
 @Component({
   selector: 'ngx-upload',
@@ -52,6 +52,11 @@ export class UploadComponent implements OnInit {
       this.files = data['objects']
       console.log(data)
     })
+  }
+
+  change(event) {
+    let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
+    this.fileToUpload = inputEl.files.item(0)
   }
 
   upload() {

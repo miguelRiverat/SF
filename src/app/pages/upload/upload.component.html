@@ -7,7 +7,7 @@
       <form>
         <div class="custom-file form-group">
           <label class="custom-file-label" for="file">{{ fileToUpload && fileToUpload.name  || 'Selecciona archivo'}}</label>
-          <input class="custom-file-input custom-file-control form-control-file" id="photo" type="file" value="Buscar" />
+          <input class="custom-file-input custom-file-control form-control-file" id="photo" type="file" value="Buscar" (change)="change($event)" />
         </div>
         <button type="button" class="btn btn-success btn-s margin float-right" (click)="upload()">
           Subir...
