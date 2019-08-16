@@ -6,7 +6,7 @@ import { NbToastrService } from '@nebular/theme';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 
-const URL = 'http://localhost:3000/uploadfile';
+const URL = 'http://10.128.15.198:3000/uploadfile';
 
 @Component({
   selector: 'ngx-upload',
