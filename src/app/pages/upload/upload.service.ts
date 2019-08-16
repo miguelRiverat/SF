@@ -18,7 +18,7 @@ export class UploadService {
     }
 
   postFile(fileToUpload: File): any {
-    const endpoint = 'http://10.128.15.198:3000/uploadfile';
+    const endpoint = 'http://104.155.151.89:3000/uploadfile';
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     return this.http
