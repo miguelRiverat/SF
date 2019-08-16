@@ -2,10 +2,11 @@ import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { UploadService } from './upload.service';
 import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { HttpClient } from '@angular/common/http';
+import { NbToastrService } from '@nebular/theme';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 
-const URL = 'http://35.238.233.15:3000/uploadfile';
+const URL = 'http://localhost:3000/uploadfile';
 
 @Component({
   selector: 'ngx-upload',
@@ -25,8 +26,10 @@ export class UploadComponent implements OnInit {
     updated: String,
     path: String
   }[];
+  public datepicker = '';
+  loading = false;
 
-  constructor(private service: UploadService, private http: HttpClient, private el: ElementRef) { }
+  constructor(private service: UploadService, private http: HttpClient, private el: ElementRef, private toastrService: NbToastrService) { }
 
   ngOnInit() {
     this.service.getListBucket()
@@ -42,7 +45,7 @@ export class UploadComponent implements OnInit {
   }
 
   handleFileInput(files: FileList) {
-    console.log(files)
+
     this.fileToUpload = files.item(0)
   }
 
@@ -59,21 +62,38 @@ export class UploadComponent implements OnInit {
     this.fileToUpload = inputEl.files.item(0)
   }
 
+  showToast(position, message) {
+    this.toastrService.show(
+      'Detalles de la carga',
+      `${message}`,
+      { position });
+  }
+
   upload() {
+
+    let dateRetriveFrom: HTMLInputElement = this.el.nativeElement.querySelector('#dateRetriveFrom') 
+    let dateRetriveTo: HTMLInputElement = this.el.nativeElement.querySelector('#dateRetriveTo') 
+
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
     let fileCount: number = inputEl.files.length;
     let formData = new FormData();
 
     if (fileCount > 0) {
-      this.fileToUpload = inputEl.files.item(0)
-      formData.append('file', inputEl.files.item(0));
+      this.fileToUpload = inputEl.files.item(0);
+      formData.append('file', inputEl.files.item(0))
+      formData.append('date', new Date(dateRetriveFrom.value).toISOString())
+      this.loading = true
       this.http
         .post(URL, formData).map((res:Response) => res).subscribe(
           (success) => {
+          this.loading = false
+          this.showToast('top-right', 'Carga completa!')
           this.updateList()
-          alert('upload compleate')
         },
-        (error) => alert(error))
+        (error) => {
+          this.loading = false;
+          this.showToast('top-right', error.message)
+        })
     }
   }
 }

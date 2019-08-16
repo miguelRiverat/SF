@@ -18,7 +18,7 @@ import {
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
-  NbWindowModule,
+  NbWindowModule
 } from '@nebular/theme';
 import {
   NbCardModule
@@ -35,7 +35,6 @@ import { FileSelectDirective } from 'ng2-file-upload';
     AppRoutingModule,
     NbCardModule,
     ThemeModule.forRoot(),
-
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),

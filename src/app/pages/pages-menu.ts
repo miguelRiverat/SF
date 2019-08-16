@@ -8,27 +8,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Generacion de tablas',
-    icon: 'layout-outline',
-    link: '/pages/generate',
-    home: true,
-  },
-  {
-    title: 'Visualizacion',
-    icon: 'pie-chart-outline',
-    link: '/pages/dashboard',
-    home: true,
-  },
-  {
     title: 'Subir archivos',
     icon: 'arrow-circle-up-outline',
     link: '/pages/uploads',
-    home: false,
-  },
-  {
-    title: 'Procesos',
-    icon: 'folder-outline',
-    link: '/pages/flows',
     home: false,
   }
   /*{

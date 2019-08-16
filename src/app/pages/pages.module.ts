@@ -10,6 +10,7 @@ import {
   NbSelectModule,
   NbSpinnerModule,
   NbListModule,
+  NbDatepickerModule
 } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -41,7 +42,8 @@ import { VisualComponent } from './visual/visual.component';
     NbTabsetModule,
     NbUserModule,
     NbIconModule,
-    NbListModule
+    NbListModule,
+    NbDatepickerModule
   ],
   declarations: [
     PagesComponent,

@@ -1,45 +1,82 @@
-<div class="container">
-  <div class="card w-50">
-    <div class="card-header">
-        <h5>Cargar archivo</h5>
-    </div>
-    <div class="card-body">
-      <form>
-        <div class="custom-file form-group">
-          <label class="custom-file-label" for="file">{{ fileToUpload && fileToUpload.name  || 'Selecciona archivo'}}</label>
-          <input class="custom-file-input custom-file-control form-control-file" id="photo" type="file" value="Buscar" (change)="change($event)" />
+<div class="container" style="background-color: white">
+  <div class="row" style="margin: 20px">
+    <div class="card w-40 col-md-6 col-md-6 col-xxl-6" style="margin-top: 20px" [nbSpinner]="loading" nbSpinnerStatus="primary">
+      <div class="card-header" style="background-color: white">
+          <h5>Cargar archivo</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="custom-file form-group">
+            <label class="custom-file-label" for="file">{{ fileToUpload && fileToUpload.name  || 'Selecciona archivo'}}</label>
+            <input class="custom-file-input custom-file-control form-control-file" id="photo" type="file" value="Buscar" (change)="change($event)" />
+          </div>
+          <button type="button" class="btn btn-success btn-s margin float-right" (click)="upload()">
+            Subir...
+          </button>
+        </form>    
+        <br>
+        <div class="form-group" style="width: 80%;">
+          <div class="row">
+            <div class="col-md-6 col-md-6 col-xxl-6">
+              <input id="dateRetriveFrom" placeholder="de:" class="form-control" [nbDatepicker]="datepicker" >
+              <nb-datepicker #datepicker ></nb-datepicker>
+            </div>
+            <div class="col-md-6 col-md-6 col-xxl-6">
+              <!--<input id="dateRetriveTo" placeholder="hasta:" class="form-control" [nbDatepicker]="datepicker_" >
+              <nb-datepicker #datepicker_ ></nb-datepicker>-->
+            </div>
+          </div>
         </div>
-        <button type="button" class="btn btn-success btn-s margin float-right" (click)="upload()">
-          Subir...
-        </button>
-      </form>    
+      </div>
+    </div>
+    <div class="card w-40 col-md-5 col-md-5 col-xxl-5" style="margin-top: 20px; margin-left: 30px">
+      <div class="card-header" style="background-color: white">
+          <h5>Info bucket</h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="custom-file form-group">
+            <h6>Numero de archivos:   {{ files && files.length}}</h6>
+          </div>
+        </form>    
+        <br>
+        <div class="form-group" style="width: 80%;">
+          <div class="row">
+            <div class="col-md-6 col-md-6 col-xxl-6">
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
   <br>
-
-  <table class="table rounded">
-    <thead class="thead-light" >
-      <tr>
-        <th class="table-light" scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Bucket</th>
-        <th scope="col">Size</th>
-        <th scope="col">Created</th>
-        <th scope="col">Updated</th>
-        <th scope="col">Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table-light" *ngFor="let object of files; let i = index">
-        <th scope="row">{{i}}</th>
-        <td>{{object.name}}</td>
-        <td>{{object.bucket}}</td>
-        <td>{{ object.size ? ( object.size / 1000000 ) + ' Mb' : 0 }}</td>
-        <td>{{object.timeCreated}}</td>
-        <td>{{object.updated}}</td>
-        <td>{{object.contentType}}</td>
-      </tr>
-    </tbody>
-  </table>  
+  <div class="row">
+    <div class="col-md-12 col-md-12 col-xxl-12">
+      <table class="table rounded">
+        <thead class="thead-light" >
+          <tr>
+            <th class="table-light" scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Bucket</th>
+            <th scope="col">Size</th>
+            <th scope="col">Created</th>
+            <th scope="col">Updated</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-light" *ngFor="let object of files; let i = index">
+            <th scope="row">{{i}}</th>
+            <td>{{object.name}}</td>
+            <td>{{object.bucket}}</td>
+            <td>{{ object.size ? ( object.size / 1000000 ) + ' Mb' : 0 }}</td>
+            <td>{{object.timeCreated}}</td>
+            <td>{{object.updated}}</td>
+            <td>{{object.contentType}}</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
+  </div>
 </div>
