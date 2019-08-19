@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs/Subject'
-import { Observable } from 'rxjs/Observable'
 import { timeout, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
@@ -18,8 +16,8 @@ export class UploadService {
     }
 
   postFile(fileToUpload: File): any {
-    //const endpoint = 'http://104.155.151.89:3000/uploadfile';
-    const endpoint = 'http://localhost:3000/uploadfile';
+    const endpoint = 'http://35.188.82.218:3000/uploadfile';
+    //const endpoint = 'http://localhost:3000/uploadfile';
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     return this.http
