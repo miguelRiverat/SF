@@ -91,28 +91,7 @@ export class ExploreComponent {
             shadowOffsetY: 2
         }
     }],
-    series: [
-        {
-            name:'Unidades',
-            type:'line',
-            smooth:true,
-            symbol: 'none',
-            sampling: 'average',
-            itemStyle: {
-                color: 'rgb(153, 204, 255)'
-            },
-            areaStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: 'rgb(230, 242, 255)'
-                }, {
-                    offset: 1,
-                    color: 'rgb(153, 204, 255)'
-                }])
-            },
-            data: []
-        }
-    ]
+    series: []
 };
   public loadingOpts = {
     text: 'loading',
@@ -167,13 +146,45 @@ export class ExploreComponent {
         .get(this.deatil(encodeURI(from), encodeURI(to), encodeURI(subs), encodeURI(clas), true))
         .subscribe(data => {
             console.log(data)
-        })
+
+            this.chartOption['series'] = data['results'].map(elems => {
+              return {
+                name:'Unidades',
+                type:'line',
+                smooth:true,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    color: 'rgb(153, 204, 255)'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(230, 242, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(153, 204, 255)'
+                    }])
+                },
+                data: elems.serie.map(el => el.value)
+              }
+            })
+
+            console.log(this.chartOption)
+
+            this.showLine = true
+
 
         /*data['rows'].forEach(element => {
           this.chartOption['series'][0]['data'].push(`${element.mthunidades}`) 
           this.chartOption['xAxis']['data'].push(`${element.year}-${element.month}-01`)
         })*/
-        this.showLine = true
+        
+
+
+        })
+
+        
     })
   }
 
