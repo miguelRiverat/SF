@@ -81,7 +81,7 @@ export class GenerateComponent {
     this.enfermIn = date;
   }
 
-  generate(type, date, molecula) {
+  generate(type, date, molecula = undefined) {
     let url = ''
     let body = {}
     let dateN = `${date}-01`

@@ -23,11 +23,11 @@ import {
 import {
   NbCardModule
 } from '@nebular/theme';
-import { FileSelectDirective } from 'ng2-file-upload';
+//import { FileSelectDirective } from 'ng2-file-upload';
 
 
 @NgModule({
-  declarations: [AppComponent, FileSelectDirective],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -44,7 +44,7 @@ import { FileSelectDirective } from 'ng2-file-upload';
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
-    CoreModule.forRoot(),
+    CoreModule.forRoot()
   ],
   bootstrap: [AppComponent],
 })
