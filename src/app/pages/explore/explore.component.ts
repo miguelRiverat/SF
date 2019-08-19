@@ -19,9 +19,11 @@ export class ExploreComponent {
   @Input() corpsIn = 'SANFER CORP.';
 
   public corps = [];
+  public productDist: string[];
+  public all: string[];
 
   public productsUrl = 'https://us-central1-prime-principle-243417.cloudfunctions.net/alerts'
-  public deatil = id => `https://us-central1-prime-principle-243417.cloudfunctions.net/alerts?detail=${id}`
+  public deatil = (from, to, subs, clas, list) => `https://us-central1-prime-principle-243417.cloudfunctions.net/alerts?detail=true&from=${from}&to=${to}&subs=${subs}&clas=${clas}&list=${list}`
   public corpUrl = `https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=corp`
 
   public prodModel : {
@@ -36,7 +38,19 @@ export class ExploreComponent {
     tipo: string,
     fechalanzamiento: string,
     detalleid: string
-  }[]
+  }[] = [{
+    tendencia: '',
+    corporacion: '',
+    producto: '',
+    presentacion: '',
+    moleculan1:  '',
+    claseterapeutica: '',
+    fecini: '',
+    fecend: '',
+    tipo: '',
+    fechalanzamiento: '',
+    detalleid: ''
+  }]
 
   public alertTen = ''
   public showLine = false
@@ -122,20 +136,43 @@ export class ExploreComponent {
 
   constructor(private http: HttpClient) {
     this.listProducts(this.corpsIn)
-    this.getCorps()
+    //this.getCorps()
   }
 
-  getDetail (deatil) {
+  getDetail (json) {
+
+    let from = json['fecini']['value']
+    let to = json['fecend']['value']
+    let subs = json['moleculan1']
+    let clas = json['claseterapeutica']
+    this.alertTen = json['tendencia']
+
     this.showLine = false
     return this.http
-    .get(this.deatil(encodeURI(deatil)))
+    .get(this.deatil(encodeURI(from), encodeURI(to), encodeURI(subs), encodeURI(clas), false))
     .subscribe(data => {
-        this.alertTen = data['tendencia']
-        this.modelDetail = data
-        data['rows'].forEach(element => {
+        this.modelDetail = data['results']
+        let all = []
+        this.productDist = this.modelDetail
+          .filter(ele => {
+            if (!all.includes(ele.presentacion)) { 
+              all.push(ele.presentacion) 
+              return true
+            }
+            return false
+          })
+          .map(ele => ele.presentacion)
+        
+        return this.http
+        .get(this.deatil(encodeURI(from), encodeURI(to), encodeURI(subs), encodeURI(clas), true))
+        .subscribe(data => {
+            console.log(data)
+        })
+
+        /*data['rows'].forEach(element => {
           this.chartOption['series'][0]['data'].push(`${element.mthunidades}`) 
           this.chartOption['xAxis']['data'].push(`${element.year}-${element.month}-01`)
-        })
+        })*/
         this.showLine = true
     })
   }
@@ -155,28 +192,9 @@ export class ExploreComponent {
 
   listProducts (lab) {
     return this.http
-      .get(`${this.productsUrl}?corp=${lab}`)
+      .get(`${this.productsUrl}`)
       .subscribe(data => {
-
-        
-
-        this.prodModel = data
-
-
-        console.log(this.prodModel)
-
-        /*this.prodModel = data['results'].reduce((acum, elem) => {
-          return acum.concat(elem.forms.map(form => {
-            return {
-              corp: elem.corp,
-              producto: elem.producto,
-              presentacion: form.name,
-              //genero:  form.genero,
-              //molecula: form.molecula,
-              prediction: ''
-            }
-          }))
-        },[])*/
+        this.prodModel = data['results']
       })
   }
 }

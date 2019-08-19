@@ -36,7 +36,7 @@
             </tr>
           </thead>
           <tbody class="table-hover">
-            <tr class="table-light custom-tr" *ngFor="let object of prodModel; let i = index" (click)="getDetail(object.detalleid)">
+            <tr class="table-light custom-tr" *ngFor="let object of prodModel; let i = index" (click)="getDetail(object)">
               <td>{{object.tendencia}}</td>
               <td>{{object.corporacion}}</td>
               <td>{{object.producto}}</td>
