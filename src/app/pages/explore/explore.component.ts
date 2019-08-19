@@ -20,19 +20,25 @@ export class ExploreComponent {
 
   public corps = [];
 
-  public productsUrl = 'https://us-central1-prime-principle-243417.cloudfunctions.net/products'
-  public deatil = form => `https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=explore&form=${form}`
+  public productsUrl = 'https://us-central1-prime-principle-243417.cloudfunctions.net/alerts'
+  public deatil = id => `https://us-central1-prime-principle-243417.cloudfunctions.net/alerts?detail=${id}`
   public corpUrl = `https://us-central1-prime-principle-243417.cloudfunctions.net/generic-query?type=corp`
 
-  public predictionModel : {
-    corp: string,
+  public prodModel : {
+    tendencia: string,
+    corporacion: string,
     producto: string,
     presentacion: string,
-    //genero:  string,
-    //molecula: string,
-    prediction: string
+    moleculan1:  string,
+    claseterapeutica: string,
+    fecini: String,
+    fecend: String,
+    tipo: string,
+    fechalanzamiento: string,
+    detalleid: string
   }[]
 
+  public alertTen = ''
   public showLine = false
   public chartOption: EChartOption = {
     tooltip: {
@@ -103,13 +109,14 @@ export class ExploreComponent {
   }
 
   public modelDetail :{
-    corporacion: String,
-    producto: String,
-    presentacion: String,
-    year: Number,
-    month: Number,
-    mthprecio: Number,
-    mthunidade: Number
+    tendencia: string,
+    corporacion: string,
+    producto: string,
+    presentacion: string,
+    moleculan1: string,
+    fecini: string,
+    fecend: string,
+    fechalanzamiento: string   
   }[];
 
 
@@ -118,12 +125,13 @@ export class ExploreComponent {
     this.getCorps()
   }
 
-  getDetail (form) {
+  getDetail (deatil) {
     this.showLine = false
     return this.http
-    .get(this.deatil(encodeURI(form)))
+    .get(this.deatil(encodeURI(deatil)))
     .subscribe(data => {
-        this.modelDetail = data['rows']
+        this.alertTen = data['tendencia']
+        this.modelDetail = data
         data['rows'].forEach(element => {
           this.chartOption['series'][0]['data'].push(`${element.mthunidades}`) 
           this.chartOption['xAxis']['data'].push(`${element.year}-${element.month}-01`)
@@ -149,7 +157,15 @@ export class ExploreComponent {
     return this.http
       .get(`${this.productsUrl}?corp=${lab}`)
       .subscribe(data => {
-        this.predictionModel = data['results'].reduce((acum, elem) => {
+
+        
+
+        this.prodModel = data
+
+
+        console.log(this.prodModel)
+
+        /*this.prodModel = data['results'].reduce((acum, elem) => {
           return acum.concat(elem.forms.map(form => {
             return {
               corp: elem.corp,
@@ -160,7 +176,7 @@ export class ExploreComponent {
               prediction: ''
             }
           }))
-        },[])
+        },[])*/
       })
   }
 }
