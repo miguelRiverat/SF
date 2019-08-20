@@ -166,12 +166,10 @@ export class ExploreComponent {
                         color: 'rgb(153, 204, 255)'
                     }])
                 },
-                data: elems.serie.map(el => el.value)
+                data: elems.vals
               }
             })
-
-            console.log(this.chartOption)
-
+            this.chartOption['xAxis']['data'] = data['results'][0]['serie']
             this.showLine = true
 
 
