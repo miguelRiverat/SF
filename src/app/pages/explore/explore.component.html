@@ -37,17 +37,17 @@
           </thead>
           <tbody class="table-hover">
             <tr class="table-light custom-tr" *ngFor="let object of prodModel; let i = index" (click)="getDetail(object)">
-              <td>{{object.tendencia}}</td>
-              <td>{{object.corporacion}}</td>
-              <td>{{object.producto}}</td>
-              <td>{{object.presentacion}}</td>
-              <td>{{object.moleculan1}}</td>
-              <td>{{object.claseterapeutica}}</td>
-              <td>{{object.fecini.value}}</td>
-              <td>{{object.fecend.value}}</td>
-              <td>{{object.tipo}}</td>
-              <td>{{object.fechalanzamiento.value}}</td>
-              <td>{{object.detalleid}}</td>
+              <td>{{object.tendencia || ""}}</td>
+              <td>{{object.corporacion || ""}}</td>
+              <td>{{object.producto || ""}}</td>
+              <td>{{object.presentacion || ""}}</td>
+              <td>{{object.moleculan1 || ""}}</td>
+              <td>{{object.claseterapeutica || ""}}</td>
+              <td>{{object.fecini && object.fecini.value || "" }}</td>
+              <td>{{object.fecend && object.fecend.value}}</td>
+              <td>{{object.tipo || ""}}</td>
+              <td>{{object.fechalanzamiento && object.fechalanzamiento.value}}</td>
+              <td>{{object.detalleid || ""}}</td>
             </tr>
           </tbody>
         </table>  

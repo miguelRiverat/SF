@@ -130,6 +130,9 @@ export class ExploreComponent {
     return this.http
     .get(this.deatil(encodeURI(from), encodeURI(to), encodeURI(subs), encodeURI(clas), false))
     .subscribe(data => {
+
+      console.log(data)
+
         this.modelDetail = data['results']
         let all = []
         this.productDist = this.modelDetail
@@ -141,13 +144,18 @@ export class ExploreComponent {
             return false
           })
           .map(ele => ele.presentacion)
+
         
         return this.http
         .get(this.deatil(encodeURI(from), encodeURI(to), encodeURI(subs), encodeURI(clas), true))
         .subscribe(data => {
-            console.log(data)
+            console.log('data', data)
 
             this.chartOption['series'] = data['results'].map(elems => {
+
+
+              let color = data ? 'rgb(153, 204, 255)' : 'rgb(219, 63, 0)'
+
               return {
                 name:'Unidades',
                 type:'line',
@@ -203,7 +211,8 @@ export class ExploreComponent {
     return this.http
       .get(`${this.productsUrl}`)
       .subscribe(data => {
-        this.prodModel = data['results']
+        console.log(data)
+        this.prodModel = data['results'].slice(0,100)
       })
   }
 }
